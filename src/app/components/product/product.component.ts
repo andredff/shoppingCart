@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { ProductsService } from 'src/app/services/products.service';
 import { Product } from '../../shared/product.model';
 import { Router, ActivatedRoute } from '@angular/router';
-import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-product',
@@ -15,11 +14,13 @@ export class ProductComponent implements OnInit {
 
   public product: Product;
 
+  produtoAdicionado = new EventEmitter<string>();
+
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private productsService: ProductsService,
-    private cartService: CartService,
   ) { }
 
   ngOnInit() {
@@ -41,7 +42,7 @@ export class ProductComponent implements OnInit {
    */
   addItem(product: Product) {
     this.productsService.addItem(this.product);
-    this.router.navigate(['/cart']);
+    // this.router.navigate(['/cart']);
 
   }
 

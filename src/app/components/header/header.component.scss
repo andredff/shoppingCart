@@ -72,12 +72,14 @@
 .subnav-content {
   background: #202025;
   min-width: 25rem;
-  min-height: 5rem;
+  min-height: 15rem;
+  max-height: 45rem;
   position: absolute;
   transition: all 0.5s ease;
   // margin-top: 0.6rem;
   right: 0;
   display: none;
+  overflow-y: scroll;
 }
 
 .subnav-content a:hover {

@@ -7,36 +7,59 @@
     <span class="list-icon-title">SACOLA</span>
   </div>
 
-  <div class="card" *ngFor="let product of itensBag">
-    <div class="card-figure">
-      <img [src]="product?.img" alt="Imagem não encontrada" title="Imagem não encontrada">
-    </div>
-    <div class="card-item">
-      <p class="card-item-top">
-        <span class="card-item-top-title">{{product.title}}</span>
-        <span class="card-item-top-description">{{product.description}}</span>
-      </p>
-      <div class="card-item-bottom">
-        <div class="card-item-bottom-amount">
-          Quantidade:
-          <a (click)="decrease(product)">-</a>
-          {{product.amount}}
-          <a (click)="increase(product)">+</a>
+  <div *ngIf="itensBag != ''">
+    <div style="overflow-y: scroll !important;">
+      <div class="card" *ngFor="let product of itensBag">
+        <div class="card-figure">
+          <img [src]="product?.img" alt="Imagem não encontrada" title="Imagem não encontrada">
+        </div>
+        <div class="card-item">
+          <p class="card-item-top">
+            <span class="card-item-top-title">{{product.title}}</span>
+            <span class="card-item-top-description">{{product.description}}</span>
+          </p>
+          <div class="card-item-bottom">
+            <p class="card-item-bottom-amount">
+              Quantidade:
+              <a (click)="decrease(product)">-</a>
+              {{product.amount}}
+              <a (click)="increase(product)">+</a>
 
-          <span class="card-item-bottom-price">{{product.currencyFormat }}
-            {{product.price * product.amount | currency: 'BRL': true}}</span>
+              <span class="card-item-bottom-price">{{product.currencyFormat }}
+                {{product.price * product.amount | currency: 'BRL': code}}</span>
+            </p>
+          </div>
+        </div>
+        <div class="card-close">
+          <a (click)="remove(product)">x</a>
         </div>
       </div>
     </div>
-    <div class="card-close">
-      <a (click)="remove(product)">x</a>
+    <div class="total-order">
+      <div class="total-order-description" style="flex: 1;">
+        <span class="total-order-description-title">SUBTOTAL</span>
+      </div>
+      <div class="total-order-description" style="text-align: right !important">
+        <span class="total-order-description-total">R$
+          <strong>{{ cartService.totalOrder() | price }}</strong>
+          <em>ou em até 10x de R$ {{ cartService.totalInstallments() | price}}</em>
+        </span>
+      </div>
     </div>
+
+    <button class="btn" (click)="buy()">COMPRAR</button>
+    <br />
+    <br />
+    <button class="btn btn-outline" routerLink="/">ESCOLHER MAIS PRODUTOS</button>
+
   </div>
 
-
-  <div style="COLOR: WHITE;padding: 50px 0">
-    SUBTOTAL: {{storageService.totalCarrinhoCompras() | currency: 'BRL': true }}
+  <div class="emptyBag" *ngIf="itensBag == ''">
+    <p>
+      Nenhum item na sacola
+    </p>
   </div>
-
 
 </div>
+
+<!-- <button class="btn" routerLink="/">Adicionar mais itens a sacola</button> -->

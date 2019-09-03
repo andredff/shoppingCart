@@ -1,16 +1,22 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { URL_API } from '../app.api';
 import { Product } from '../shared/product.model';
 import { ProductItem } from '../shared/product-item.model';
 import 'rxjs/operators';
+// import { Observable } from 'rxjs';
+// import { map, retryWhen, delay, take } from 'rxjs/operators';
 
 @Injectable()
 export class ProductsService {
 
+  constructor(private http: HttpClient) { }
+
+  static added = new EventEmitter<string>();
+
   private url = '/products';
 
-  constructor(private http: HttpClient) { }
+  produtoAdicionado = new EventEmitter<string>();
 
   listAll(): ProductItem[] {
     const products = localStorage.products;
@@ -63,6 +69,8 @@ export class ProductsService {
       products.push(itemBag);
     }
     localStorage.products = JSON.stringify(products);
+    ProductsService.added.emit();
+
   }
 
 }

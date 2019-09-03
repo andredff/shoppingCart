@@ -1,7 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ProductItem } from '../../shared/product-item.model';
 import { CartService } from 'src/app/services/cart.service';
-import { StorageService } from 'src/app/services/storage.service';
+import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
   selector: 'app-cart',
@@ -11,14 +11,21 @@ import { StorageService } from 'src/app/services/storage.service';
 })
 export class CartComponent implements OnInit {
 
+  public itensBag: ProductItem[];
+  public totalOrder: number;
+  public totalInstallments: number;
 
-  @Input() public itensBag: ProductItem[];
-
-  constructor(private cartService: CartService, private storageService: StorageService) { }
+  constructor(private cartService: CartService) { }
 
   ngOnInit() {
     // localStorage.clear();
     this.itensBag = this.cartService.listAll();
+    this.total();
+    ProductsService.added.subscribe(
+      products => {
+        this.itensBag = this.cartService.listAll();
+      }
+    );
   }
 
   /**
@@ -43,6 +50,20 @@ export class CartComponent implements OnInit {
   public remove(product: ProductItem) {
     this.cartService.deleteItem(product);
     this.itensBag = this.cartService.listAll();
+  }
+
+  total() {
+    this.totalOrder = this.cartService.totalOrder();
+    this.totalInstallments = (this.totalOrder / 10);
+  }
+
+  buy() {
+    // this.itensBag = [];
+    // localStorage.clear();
+  }
+
+  teste() {
+    console.log('teste');
   }
 
 }

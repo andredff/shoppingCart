@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-
 import { ProductsService } from 'src/app/services/products.service';
 import { Product } from 'src/app/shared/product.model';
-
-import { PricePipe } from '../../pipes/price.pipe';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +10,9 @@ import { PricePipe } from '../../pipes/price.pipe';
 export class HomeComponent implements OnInit {
 
   public products: Product[];
-  public price: any;
+  public error = false;
+
+
 
   constructor(private productsService: ProductsService) { }
 
@@ -33,6 +31,7 @@ export class HomeComponent implements OnInit {
       },
       ).catch((param: any) => {
         console.log(param);
+        this.error = true;
       });
   }
 

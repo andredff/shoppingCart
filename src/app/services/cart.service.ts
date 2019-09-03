@@ -1,10 +1,14 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { ProductItem } from '../shared/product-item.model';
 
 @Injectable()
 export class CartService {
 
   constructor() { }
+  static removed = new EventEmitter<string>();
+
+  public order: number;
+  public installments: number;
 
   /**
    * Exibe lista de produtos adicionados ao carrinho
@@ -52,6 +56,8 @@ export class CartService {
         localStorage.products = JSON.stringify(products);
       }
     });
+    CartService.removed.emit();
+
   }
 
   /**
@@ -59,11 +65,16 @@ export class CartService {
    */
   totalOrder(): number {
     const products: ProductItem[] = this.listAll();
-    let total = 0;
+    this.order = 0;
     products.map((item: ProductItem) => {
-      total = total + (item.price * item.amount);
+      this.order = this.order + (item.price * item.amount);
     });
-    return total;
+    return this.order;
+  }
+
+  totalInstallments(): number {
+    this.totalOrder();
+    return this.installments = (this.order / 10);
   }
 
 }

@@ -7,24 +7,22 @@
 
   <div class="product-box">
 
-    <div class="product-box-content" style="align-items: center;display: grid;">
+    <div class="product-box-content">
       <h4>{{product.title}} - {{product.style}}</h4>
       <p>{{product.description}}</p>
 
-      <div>
-        <p style=" font-size: 28px;color: tomato">{{product.currencyFormat}} {{product.price | price}}</p>
+      <div class="product-box-content-price">
+        <p>{{product.currencyFormat}} {{product.price | price}}</p>
       </div>
 
-      <div class="produc-box-footer">
+      <div>
         <p *ngIf="product?.isFreeShipping">Frete grátis</p>
       </div>
 
       <div> Tamanho: </div>
-      <div style="display: flex; justify-content: center;">
+      <div class="product-box-content-sizes" style="display: flex; justify-content: center;">
         <div *ngFor="let sizes of product.availableSizes">
-          <a style="color:#000; margin: 5px; display: block; padding: 0 7px; height: 28px; min-width: 28px;
-          text-align: center; font-size: .6875rem; line-height: 26px; -webkit-border-radius: 20px; border-radius:
-          20px; font-weight: 700; text-decoration: none; border: 1px solid #ccc;">{{sizes}}</a>
+          <a>{{sizes}}</a>
         </div>
       </div>
     </div>

@@ -3,8 +3,7 @@
     <div class="card-box-image">
       <a [routerLink]="['/', product.id]">
         <div>
-          <button>conferir</button>
-          <img [src]="product.img" alt="" />
+          <img [src]="product.img" [alt]="product.title" />
         </div>
       </a>
     </div>
@@ -13,8 +12,11 @@
       <p class="card-box-content-price">
         <span>{{product.currencyFormat}}</span>
         <strong>{{product.price | price }}</strong>
-        <button (click)="addProduct('1','teste')">add</button>
       </p>
     </div>
   </div>
+</div>
+
+<div *ngIf="error">
+  Não foi possivel carregar os produtos, tente novamente mais tarde
 </div>

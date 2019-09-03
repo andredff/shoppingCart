@@ -8,19 +8,9 @@
   display: flex;
   border-bottom: 1px solid rgba(0, 0, 0, 0.5);
   &:hover {
-    // &::before {
-    //   content: "";
-    //   position: absolute;
-    //   top: 0px;
-    //   left: 0px;
-    //   width: 100%;
-    //   height: 100%;
-    //   z-index: 3;
-    //   background-color: #000;
-    //   opacity: 0.3;
-    //   -webkit-transition: all 0.5s;
-    //   transition: all 0.5s;
-    // }
+    background-color: #000;
+    opacity: 0.6;
+    cursor: pointer;
     .card-close {
       color: #fff;
     }
@@ -76,17 +66,6 @@
   }
   &-close {
     z-index: 9999;
-    :hover {
-      color: #fff;
-      cursor: pointer;
-    }
-  }
-}
-@media screen and (max-width: 767px) {
-  .card {
-    &-figure {
-      min-width: 70px;
-    }
   }
 }
 
@@ -94,7 +73,7 @@
   max-width: 980px;
   padding: 20px;
   min-height: 300px;
-  margin: 0 auto;
+  margin: 20px auto;
   background-color: #202025;
   &-icon {
     position: relative;
@@ -129,30 +108,23 @@
     overflow-y: scroll;
   }
 }
-@media screen and (max-width: 767px) {
-  .list {
-    width: 100%;
-    max-width: 100%;
-    padding: 0px;
-    margin: 0;
-    &-icon {
-      padding-top: 10px;
-    }
-    &-itens {
-      height: auto;
-    }
-  }
-}
 
-.total-cart {
-  height: 70px;
+.total-order {
+  display: flex;
+  flex: 1;
+  max-width: 980px;
+  padding: 10px;
   &-description {
     display: flex;
     justify-content: space-between;
-    flex-direction: column;
+    // flex-direction: column;
     align-items: center;
     color: #fff;
     font-size: 12px;
+    margin: 10px 0;
+    &-title {
+      font-size: 24px;
+    }
     &-total {
       strong {
         font-size: 18px;
@@ -162,5 +134,42 @@
         display: block;
       }
     }
+  }
+}
+
+.emptyBag {
+  display: flex;
+  justify-content: center;
+  font-size: 32px;
+  color: #fff;
+}
+
+.link {
+  font-size: 22px;
+  color: #000;
+  text-decoration: none;
+}
+
+.btn {
+  // display: inline-block;
+  padding: 15px 30px;
+  border: 0;
+  -webkit-border-radius: 0.25rem;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #fff;
+  background: #000;
+  border: 1px solid #000;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin: 0 auto;
+  // position: absolute;
+  bottom: 0;
+  flex: 1;
+  width: 100%;
+  &-outline {
+    background: transparent;
+    border: 1px solid #fff;
   }
 }
