@@ -37,12 +37,12 @@
         margin: 8px;
         &::before {
           content: "";
-          background-color: #dfbd00;
+          margin: 0 auto;
+          display: block;
           width: 22px;
           height: 3px;
           transition: all 0.2s;
-          margin: 0 auto;
-          display: block;
+          background-color: #dfbd00;
         }
         span {
           font-size: 12px;
@@ -55,8 +55,8 @@
     &:hover {
       .card-box-content-price {
         &::before {
-          width: 100px;
-          opacity: 0.5;
+          width: 50%;
+          opacity: 0.4;
         }
       }
     }

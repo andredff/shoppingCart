@@ -3,7 +3,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
   // grid-gap: 30px;
-  margin-top: 50px;
+  margin-top: 150px;
   position: relative;
   p {
     margin: 5px;
@@ -74,18 +74,16 @@
 }
 
 .info {
-  right: 20%;
-  top: 90px;
+  right: 12%;
+  top: -100px;
   height: 60px;
   width: 250px;
-  padding: 10px;
   text-align: center;
-  padding: 21px 0;
+  padding: 22px 6px;
   background: #202025;
   color: yellow;
   border-radius: 4px;
   max-width: 500px;
-  top: 40px;
-  position: fixed;
+  position: absolute;
   box-shadow: 1px 7px 14px -5px rgba(0, 0, 0, 0.2);
 }

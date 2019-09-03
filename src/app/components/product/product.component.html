@@ -4,9 +4,7 @@
     <img [src]="product?.img" alt="" />
   </div>
   <span *ngIf="showInfo" class="info">Produto adicionado ao carrinho</span>
-
   <div class="product-box">
-
     <div class="product-box-content">
       <h4>{{product.title}} - {{product.style}}</h4>
       <p>{{product.description}}</p>
@@ -30,7 +28,5 @@
     <div class="product-box-center">
       <button class="btn" (click)="addItem()">COMPRAR</button>
     </div>
-
   </div>
-
 </div>
