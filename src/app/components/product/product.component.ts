@@ -13,9 +13,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class ProductComponent implements OnInit {
 
   public product: Product;
-
-  produtoAdicionado = new EventEmitter<string>();
-
+  public showInfo = false;
 
   constructor(
     private router: Router,
@@ -42,6 +40,10 @@ export class ProductComponent implements OnInit {
    */
   addItem(product: Product) {
     this.productsService.addItem(this.product);
+    this.showInfo = true;
+    setTimeout(() => {
+      this.showInfo = false;
+    }, 2000);
     // this.router.navigate(['/cart']);
 
   }

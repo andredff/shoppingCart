@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
@@ -23,7 +23,7 @@ import { ProductComponent } from './components/product/product.component';
     HomeComponent,
     CartComponent,
     HeaderComponent,
-    ProductComponent
+    ProductComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,8 +31,11 @@ import { ProductComponent } from './components/product/product.component';
     HttpClientModule,
     RouterModule.forRoot(ROUTES),
     PipeModule.forRoot(),
+
   ],
   providers: [ProductsService, CartService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+
 })
 export class AppModule { }
