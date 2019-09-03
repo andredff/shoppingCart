@@ -1,7 +1,7 @@
 <div class="card">
   <div class="card-box" *ngFor="let product of products">
     <div class="card-box-image">
-      <a [routerLink]="['/', product.id]">
+      <a routerLink="['/', product.id]">
         <div>
           <img [src]="product.img" [alt]="product.title" />
         </div>
