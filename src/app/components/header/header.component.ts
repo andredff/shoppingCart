@@ -15,7 +15,7 @@ export class HeaderComponent implements OnInit {
   constructor(private cartService: CartService) { }
 
   ngOnInit() {
-    this.itensBag = this.cartService.exibirItens();
+    this.itensBag = this.cartService.listAll();
 
   }
 

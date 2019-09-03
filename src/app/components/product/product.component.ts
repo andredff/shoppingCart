@@ -3,7 +3,6 @@ import { ProductsService } from 'src/app/services/products.service';
 import { Product } from '../../shared/product.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CartService } from 'src/app/services/cart.service';
-import { setLocalStorage, getLocalStorage } from '../../services/storage.service';
 
 @Component({
   selector: 'app-product',
@@ -15,12 +14,12 @@ import { setLocalStorage, getLocalStorage } from '../../services/storage.service
 export class ProductComponent implements OnInit {
 
   public product: Product;
-  newList: [];
 
-  constructor(private router: Router,
-              private route: ActivatedRoute,
-              private productsService: ProductsService,
-              private cartService: CartService,
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private productsService: ProductsService,
+    private cartService: CartService,
   ) { }
 
   ngOnInit() {
@@ -38,18 +37,12 @@ export class ProductComponent implements OnInit {
   }
 
   /**
-   *
    * Método para adicionar produto ao carrinho de compras
-   *
    */
-  adicionarItemCarrinho(product: Product) {
-    this.cartService.includeItem(this.product);
+  addItem(product: Product) {
+    this.productsService.addItem(this.product);
     this.router.navigate(['/cart']);
+
   }
-
-
-
-
-
 
 }

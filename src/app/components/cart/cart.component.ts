@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ProductItem } from '../../shared/product-item.model';
 import { CartService } from 'src/app/services/cart.service';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-cart',
@@ -10,26 +11,30 @@ import { CartService } from 'src/app/services/cart.service';
 })
 export class CartComponent implements OnInit {
 
-  public itensBag: ProductItem[] = [];
 
-  constructor(private cartService: CartService) { }
+  @Input() public itensBag: ProductItem[];
+
+  constructor(private cartService: CartService, private storageService: StorageService) { }
 
   ngOnInit() {
-    this.itensBag = this.cartService.exibirItens();
+    // localStorage.clear();
+    this.itensBag = this.cartService.listAll();
   }
 
   /**
    *  Incrementa quantidade do produto no carrinho
    */
   public increase(product: ProductItem) {
-    this.cartService.adicionarQuantidade(product);
+    this.cartService.increaseItem(product);
+    this.itensBag = this.cartService.listAll();
   }
 
   /**
    *  Subtrai quantidade do produto no carrinho
    */
   public decrease(product: ProductItem) {
-    this.cartService.subtrairQuantidade(product);
+    this.cartService.decreaseItem(product);
+    this.itensBag = this.cartService.listAll();
   }
 
   /**
@@ -37,6 +42,7 @@ export class CartComponent implements OnInit {
    */
   public remove(product: ProductItem) {
     this.cartService.deleteItem(product);
+    this.itensBag = this.cartService.listAll();
   }
 
 }

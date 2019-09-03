@@ -6,7 +6,7 @@
     </span>
     <span class="list-icon-title">SACOLA</span>
   </div>
-  <!-- <div class="product" *ngIf="product !== undefined"> -->
+
   <div class="card" *ngFor="let product of itensBag">
     <div class="card-figure">
       <img [src]="product?.img" alt="Imagem não encontrada" title="Imagem não encontrada">
@@ -25,11 +25,8 @@
 
           <span class="card-item-bottom-price">{{product.currencyFormat }}
             {{product.price * product.amount | currency: 'BRL': true}}</span>
-
         </div>
-
       </div>
-
     </div>
     <div class="card-close">
       <a (click)="remove(product)">x</a>
@@ -38,7 +35,7 @@
 
 
   <div style="COLOR: WHITE;padding: 50px 0">
-    SUBTOTAL: {{cartService.totalCarrinhoCompras() | currency: 'BRL': true }}
+    SUBTOTAL: {{storageService.totalCarrinhoCompras() | currency: 'BRL': true }}
   </div>
 
 

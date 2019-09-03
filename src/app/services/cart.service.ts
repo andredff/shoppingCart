@@ -1,53 +1,55 @@
 import { Injectable } from '@angular/core';
 import { ProductItem } from '../shared/product-item.model';
-import { Product } from '../shared/product.model';
-
 
 @Injectable()
 export class CartService {
 
-  public itens: ProductItem[] = [];
-
+  constructor() { }
 
   /**
    * Exibe lista de produtos adicionados ao carrinho
    */
-  public exibirItens(): ProductItem[] {
-    return this.itens;
+  listAll(): ProductItem[] {
+    const products = localStorage.products;
+    return products ? JSON.parse(products) : [] = [];
   }
 
-  public includeItem(product: Product) {
-
-    const itemBag: ProductItem = new ProductItem(
-      product.id,
-      product.img,
-      product.title,
-      product.description,
-      product.price,
-      1
-    );
-
-    /**
-     * Verifica se o item adicionado já existe no carrinho se sim apenas incrementa a quantidade
-     *
-     */
-    const itemCarrinhoEncontrado = this.itens.find((item: ProductItem) => item.id === itemBag.id);
+  /**
+   * Incrementa a quantidade do produto já existente na tela de carrinho
+   */
+  increaseItem(itemBag: ProductItem) {
+    const products = this.listAll();
+    const itemCarrinhoEncontrado = products.find((item: ProductItem) => item.id === itemBag.id);
     if (itemCarrinhoEncontrado) {
       itemCarrinhoEncontrado.amount += 1;
-    } else {
-      this.itens.push(itemBag);
     }
+    localStorage.products = JSON.stringify(products);
+  }
+
+  /**
+   * Subtrai a quantidade do produto já existente na tela de carrinho
+   */
+  decreaseItem(itemBag: ProductItem) {
+    const products = this.listAll();
+    const itemCarrinhoEncontrado = products.find((item: ProductItem) => item.id === itemBag.id);
+    if (itemCarrinhoEncontrado) {
+      itemCarrinhoEncontrado.amount -= 1;
+    }
+    if (itemCarrinhoEncontrado.amount === 0) {
+      products.splice(products.indexOf(itemCarrinhoEncontrado), 1);
+    }
+    localStorage.products = JSON.stringify(products);
   }
 
   /**
    * Deleta item do carrinho de compras
-   *
    */
-  public deleteItem(item: ProductItem) {
-    console.log(item);
-    this.itens.forEach((product, index) => {
+  deleteItem(item: ProductItem): void {
+    const products: ProductItem[] = this.listAll();
+    products.forEach((product, index) => {
       if (product.id === item.id) {
-        this.itens.splice(index, 1);
+        products.splice(index, 1);
+        localStorage.products = JSON.stringify(products);
       }
     });
   }
@@ -55,40 +57,13 @@ export class CartService {
   /**
    * Calcula total do valor a ser exibido na tela de carrinho
    */
-  public totalCarrinhoCompras(): number {
+  totalOrder(): number {
+    const products: ProductItem[] = this.listAll();
     let total = 0;
-    this.itens.map((item: ProductItem) => {
+    products.map((item: ProductItem) => {
       total = total + (item.price * item.amount);
     });
     return total;
   }
 
-  /**
-   * Incrementa a quantidade do produto já existente na tela de carrinho
-   */
-  public adicionarQuantidade(itemBag: ProductItem) {
-    const itemCarrinhoEncontrado = this.itens.find((item: ProductItem) => item.id === itemBag.id);
-    if (itemCarrinhoEncontrado) {
-      itemCarrinhoEncontrado.amount += 1;
-    }
-  }
-
-  /**
-   * Subtrai a quantidade do produto já existente na tela de carrinho
-   */
-  public subtrairQuantidade(itemBag: ProductItem) {
-    console.log(itemBag);
-    const itemCarrinhoEncontrado = this.itens.find((item: ProductItem) => item.id === itemBag.id);
-
-    if (itemCarrinhoEncontrado) {
-      itemCarrinhoEncontrado.amount -= 1;
-    }
-    if (itemCarrinhoEncontrado.amount === 0) {
-      this.itens.splice(this.itens.indexOf(itemCarrinhoEncontrado), 1);
-    }
-  }
-
-
-
 }
-

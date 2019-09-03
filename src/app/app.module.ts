@@ -16,6 +16,7 @@ import { HomeComponent } from './components/home/home.component';
 import { CartComponent } from './components/cart/cart.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ProductComponent } from './components/product/product.component';
+import { StorageService } from './services/storage.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { ProductComponent } from './components/product/product.component';
     RouterModule.forRoot(ROUTES),
     PipeModule.forRoot(),
   ],
-  providers: [ProductsService, CartService],
+  providers: [ProductsService, CartService, StorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

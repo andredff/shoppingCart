@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { URL_API } from '../app.api';
 import { Product } from '../shared/product.model';
+import { ProductItem } from '../shared/product-item.model';
 import 'rxjs/operators';
 
 @Injectable()
@@ -10,6 +11,12 @@ export class ProductsService {
   private url = '/products';
 
   constructor(private http: HttpClient) { }
+
+  listAll(): ProductItem[] {
+    const products = localStorage.products;
+    return products ? JSON.parse(products) : [] = [];
+  }
+
 
   /**
    * Recupera e lista todos os produtos
@@ -30,6 +37,32 @@ export class ProductsService {
       .then((resposta: any) => {
         return resposta.shift();
       });
+  }
+
+  /**
+   * Adiciona produto no carrinho de compra
+   */
+  addItem(product: Product): void {
+    const products = this.listAll();
+    const itemBag: ProductItem = new ProductItem(
+      product.id,
+      product.img,
+      product.title,
+      product.description,
+      product.price,
+      1
+    );
+
+    /**
+     * Verifica se o item adicionado já existe no carrinho se sim apenas incrementa a quantidade
+     */
+    const itemCarrinhoEncontrado = products.find((item: ProductItem) => item.id === itemBag.id);
+    if (itemCarrinhoEncontrado) {
+      itemCarrinhoEncontrado.amount += 1;
+    } else {
+      products.push(itemBag);
+    }
+    localStorage.products = JSON.stringify(products);
   }
 
 }
