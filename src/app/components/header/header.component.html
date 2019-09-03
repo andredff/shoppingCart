@@ -1,0 +1,28 @@
+<div class="header">
+  <div class="container">
+    <div class="item-left">
+      <a routerLink="/">Home</a>
+    </div>
+    <div class="item-search-input">
+      <input type="textarea" placeholder="O que você está procurando?" />
+    </div>
+    <div class="item-right menu">
+      <div class="subnav">
+
+        <a routerLink="/cart" class="item-right-cart">
+          <img src="/assets/img/buy-white.png" height="25" alt="Carrinho de Produtos" title="Carrinho de Produtos">
+          <span>{{itensBag.length}}</span>
+        </a>
+        <div class="subnav-content">
+          <div>
+
+            <app-cart></app-cart>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>

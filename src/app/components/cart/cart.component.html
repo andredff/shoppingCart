@@ -1,0 +1,45 @@
+<div class="list">
+  <div class="list-icon">
+    <img src="/assets/img/bag.png" alt="Carrinho de Produtos" title="Carrinho de Produtos">
+    <span class="list-icon-qtd">
+      <strong>{{itensBag.length}}</strong>
+    </span>
+    <span class="list-icon-title">SACOLA</span>
+  </div>
+  <!-- <div class="product" *ngIf="product !== undefined"> -->
+  <div class="card" *ngFor="let product of itensBag">
+    <div class="card-figure">
+      <img [src]="product?.img" alt="Imagem não encontrada" title="Imagem não encontrada">
+    </div>
+    <div class="card-item">
+      <p class="card-item-top">
+        <span class="card-item-top-title">{{product.title}}</span>
+        <span class="card-item-top-description">{{product.description}}</span>
+      </p>
+      <div class="card-item-bottom">
+        <div class="card-item-bottom-amount">
+          Quantidade:
+          <a (click)="decrease(product)">-</a>
+          {{product.amount}}
+          <a (click)="increase(product)">+</a>
+
+          <span class="card-item-bottom-price">{{product.currencyFormat }}
+            {{product.price * product.amount | currency: 'BRL': true}}</span>
+
+        </div>
+
+      </div>
+
+    </div>
+    <div class="card-close">
+      <a (click)="remove(product)">x</a>
+    </div>
+  </div>
+
+
+  <div style="COLOR: WHITE;padding: 50px 0">
+    SUBTOTAL: {{cartService.totalCarrinhoCompras() | currency: 'BRL': true }}
+  </div>
+
+
+</div>

@@ -1,0 +1,20 @@
+<div class="card">
+  <div class="card-box" *ngFor="let product of products">
+    <div class="card-box-image">
+      <a [routerLink]="['/', product.id]">
+        <div>
+          <button>conferir</button>
+          <img [src]="product.img" alt="" />
+        </div>
+      </a>
+    </div>
+    <div class="card-box-content">
+      <p class="card-box-content-title">{{product.title}}</p>
+      <p class="card-box-content-price">
+        <span>{{product.currencyFormat}}</span>
+        <strong>{{product.price | price }}</strong>
+        <button (click)="addProduct('1','teste')">add</button>
+      </p>
+    </div>
+  </div>
+</div>
