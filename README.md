@@ -4,6 +4,12 @@
 
 Run `npm install -g json-server`
 
+## Install Dependencies
+
+Run `npm install`
+
+## Running Json Server
+
 Run `json-server --watch db.json`
 
 ## Development server
