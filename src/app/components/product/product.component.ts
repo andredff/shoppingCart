@@ -2,6 +2,7 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 import { ProductsService } from 'src/app/services/products.service';
 import { Product } from '../../shared/product.model';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ProductItem } from 'src/app/shared/product-item.model';
 
 @Component({
   selector: 'app-product',
@@ -13,7 +14,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class ProductComponent implements OnInit {
 
   public product: Product;
+  public productItem: ProductItem;
   public showInfo = false;
+  public selectedSize: string;
 
   constructor(
     private router: Router,
@@ -36,6 +39,14 @@ export class ProductComponent implements OnInit {
   }
 
   /**
+   * Seleciona tamanho do produto
+   */
+  selectSize(event) {
+    console.log(event);
+    // this.productItem.size = event;
+  }
+
+  /**
    * Método para adicionar produto ao carrinho de compras
    */
   addItem(product: Product) {
@@ -47,5 +58,7 @@ export class ProductComponent implements OnInit {
     // this.router.navigate(['/cart']);
 
   }
+
+
 
 }

@@ -12,13 +12,10 @@ export class HomeComponent implements OnInit {
   public products: Product[];
   public error = false;
 
-
-
   constructor(private productsService: ProductsService) { }
 
   ngOnInit() {
     this.getProducts();
-
   }
 
   /**
@@ -30,7 +27,7 @@ export class HomeComponent implements OnInit {
         this.products = products;
       },
       ).catch((param: any) => {
-        console.log(param);
+        // console.log(param);
         this.error = true;
       });
   }

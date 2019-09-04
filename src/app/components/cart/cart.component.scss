@@ -47,6 +47,9 @@
       &-description {
         font-size: 12px;
       }
+      &-size {
+        font-size: 12px;
+      }
     }
     &-bottom {
       flex: 1;
@@ -138,9 +141,10 @@
 }
 
 .emptyBag {
+  margin-top: 50px;
   display: flex;
   justify-content: center;
-  font-size: 32px;
+  font-size: 28px;
   color: #fff;
 }
 

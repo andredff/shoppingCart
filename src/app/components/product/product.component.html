@@ -20,13 +20,13 @@
       <div> Tamanho: </div>
       <div class="product-box-content-sizes" style="display: flex; justify-content: center;">
         <div *ngFor="let sizes of product.availableSizes">
-          <a>{{sizes}}</a>
+          <a (click)="selectSize(sizes)"> {{sizes}} </a>
         </div>
       </div>
     </div>
 
     <div class="product-box-center">
-      <button class="btn" (click)="addItem()">COMPRAR</button>
+      <button class="btn" (click)="addItem()">ADICIONAR AO CARRINHO</button>
     </div>
   </div>
 </div>

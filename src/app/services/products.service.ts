@@ -56,6 +56,7 @@ export class ProductsService {
       product.title,
       product.description,
       product.price,
+      // product.size,
       1
     );
 
@@ -70,7 +71,6 @@ export class ProductsService {
     }
     localStorage.products = JSON.stringify(products);
     ProductsService.added.emit();
-
   }
 
 }
